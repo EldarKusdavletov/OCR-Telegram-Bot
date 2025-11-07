@@ -1,7 +1,8 @@
-![Technologies](https://img.shields.io/badge/aiogram-3.x-blue.svg?logo=telegram)
+![Technologies](https://img.shields.io/badge/aiogram-3-blue.svg?logo=telegram)
 ![Technologies](https://img.shields.io/badge/Upstage-AI-purple.svg)
-![Technologies](https://img.shields.io/badge/SQLAlchemy-2.0-red.svg?logo=sqlalchemy)
-![Technologies](https://img.shields.io/badge/SQLite-3-blue.svg?logo=sqlite)
+![Technologies](https://img.shields.io/badge/PostgreSQL-gray.svg?logo=postgresql)
+![Technologies](https://img.shields.io/badge/SQLite-gray.svg?logo=sqlite)
+![Technologies](https://img.shields.io/badge/SQLAlchemy-gray.svg?logo=sqlalchemy)
 
 #### Telegram bot that extracts text from any photo you send.
 
