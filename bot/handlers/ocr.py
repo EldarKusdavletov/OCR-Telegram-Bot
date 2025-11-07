@@ -1,5 +1,5 @@
 import logging
-from datetime import datetime, UTC
+from datetime import datetime
 from aiogram import Bot, F, Router, types
 
 from bot.db.session import log_user, log_ocr
@@ -10,7 +10,7 @@ router = Router()
 
 @router.message(F.photo)
 async def handle_photo(message: types.Message, bot: Bot):
-    start_time = datetime.now(UTC)
+    start_time = datetime.utcnow()
     await log_user(message.from_user)
 
     processing_msg = await message.answer("🔍 Processing image with OCR...")
@@ -26,7 +26,7 @@ async def handle_photo(message: types.Message, bot: Bot):
         ocr_text = result.get("text", "")
         confidence = result.get("confidence", 0)
         num_pages = result.get("numBilledPages", 0)
-        processing_time = (datetime.now(UTC) - start_time).total_seconds()
+        processing_time = (datetime.utcnow() - start_time).total_seconds()
 
         await log_ocr(
             user_id=message.from_user.id,
@@ -51,7 +51,7 @@ async def handle_photo(message: types.Message, bot: Bot):
             await message.answer("⚠️ No text detected in the image.")
 
     except Exception as e:
-        processing_time = (datetime.now(UTC) - start_time).total_seconds()
+        processing_time = (datetime.utcnow() - start_time).total_seconds()
         error_msg = str(e)
         logging.error(f"Error processing photo for user {message.from_user.id}: {error_msg}")
 

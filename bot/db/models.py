@@ -1,4 +1,4 @@
-from datetime import datetime, UTC
+from datetime import datetime
 from sqlalchemy import Column, Integer, String, Float, Boolean, Text, DateTime
 from sqlalchemy.orm import declarative_base
 
@@ -12,15 +12,15 @@ class User(Base):
     username = Column(String(255), nullable=True)
     first_name = Column(String(255), nullable=True)
     last_name = Column(String(255), nullable=True)
-    first_seen = Column(DateTime, default=datetime.now(UTC))
-    last_seen = Column(DateTime, default=datetime.now(UTC), onupdate=datetime.now(UTC))
+    first_seen = Column(DateTime, default=datetime.utcnow())
+    last_seen = Column(DateTime, default=datetime.utcnow(), onupdate=datetime.utcnow())
 
 
 class OCRLog(Base):
     __tablename__ = "ocr_logs"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    timestamp = Column(DateTime, default=datetime.now(UTC))
+    timestamp = Column(DateTime, default=datetime.utcnow())
     user_id = Column(Integer)
     message_id = Column(Integer)
     photo_file_id = Column(String(255))
@@ -36,6 +36,6 @@ class CommandLog(Base):
     __tablename__ = "command_logs"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    timestamp = Column(DateTime, default=datetime.now(UTC))
+    timestamp = Column(DateTime, default=datetime.utcnow())
     user_id = Column(Integer)
     command = Column(String(100))

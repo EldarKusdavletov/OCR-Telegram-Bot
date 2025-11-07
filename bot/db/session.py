@@ -1,5 +1,5 @@
 import logging
-from datetime import datetime, UTC
+from datetime import datetime
 from aiogram import types
 
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
@@ -29,7 +29,7 @@ async def log_user(user: types.User):
             db_user = result.scalar_one_or_none()
 
             if db_user:
-                db_user.last_seen = datetime.now(UTC)
+                db_user.last_seen = datetime.utcnow()
                 db_user.username = user.username
                 db_user.first_name = user.first_name
                 db_user.last_name = user.last_name
@@ -39,7 +39,7 @@ async def log_user(user: types.User):
                     username=user.username,
                     first_name=user.first_name,
                     last_name=user.last_name,
-                    first_seen=datetime.now(UTC)  # Ensure first_seen is set
+                    first_seen=datetime.utcnow()  # Ensure first_seen is set
                 )
                 session.add(db_user)
 
@@ -76,7 +76,7 @@ async def log_ocr(user_id: int, message_id: int, photo_file_id: str,
                 processing_time=processing_time,
                 success=success,
                 error=error,
-                timestamp=datetime.now(UTC)
+                timestamp=datetime.utcnow()
             )
             session.add(log)
             await session.commit()
