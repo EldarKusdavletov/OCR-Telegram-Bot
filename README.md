@@ -6,7 +6,9 @@
 
 # OCR Telegram Bot
 
-A production-oriented Telegram bot that receives photos, runs OCR via Upstage Document Digitization API, returns extracted text to the user, and stores operational statistics in a relational database.
+Telegram bot that extracts text from any photo you send.
+
+This project receives photos in Telegram, runs OCR via Upstage Document Digitization API, returns extracted text to the user, and stores usage statistics in a relational database.
 
 ## What this project does
 
@@ -23,6 +25,13 @@ A production-oriented Telegram bot that receives photos, runs OCR via Upstage Do
 - **SQLAlchemy (async)** for persistence
 - **SQLite** for local development (via async SQLite drivers)
 - **PostgreSQL + asyncpg** for production deployment
+
+Built with:
+- `aiogram` — Async Telegram bot framework
+- `Upstage AI` — Optical Character Recognition (OCR)
+- `SQLite` — Local development database
+- `PostgreSQL` — Production database
+- `SQLAlchemy` — Object–Relational Mapping (ORM)
 
 ## Repository structure
 
@@ -109,7 +118,13 @@ Required environment variables are validated at startup in `config.py`; app exit
 
 ## Deployment status and available deployment options
 
-After repository inspection, deployment-related assets currently available are:
+Current status:
+
+- ✅ Bot is deployed and running on **Railway service**
+- ✅ Database is deployed on **Railway PostgreSQL**
+- ✅ Application process is defined via `Procfile`
+
+Deployment-related assets and setup available in this repository:
 
 1. **Procfile-based worker deployment**
    - `Procfile` contains: `worker: python main.py`
@@ -118,6 +133,7 @@ After repository inspection, deployment-related assets currently available are:
 2. **Railway PostgreSQL integration guidance**
    - Existing project convention supports Railway-managed PostgreSQL.
    - Use `postgresql+asyncpg://` driver format in `DATABASE_URL`.
+   - If Railway provides `DATABASE_PUBLIC_URL` in `postgresql://...` format, convert it to `postgresql+asyncpg://...` for SQLAlchemy async engine compatibility.
 
 ### Important operational note
 
