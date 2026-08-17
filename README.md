@@ -135,21 +135,10 @@ Deployment-related assets and setup available in this repository:
    - Use `postgresql+asyncpg://` driver format in `DATABASE_URL`.
    - If Railway provides `DATABASE_PUBLIC_URL` in `postgresql://...` format, convert it to `postgresql+asyncpg://...` for SQLAlchemy async engine compatibility.
 
-### Important operational note
-
-This bot currently runs with **long polling**, not webhook serving. No web server entrypoint, Dockerfile, or Kubernetes manifests are present in the repository, so those deployment targets are not preconfigured yet.
-
 ## Reliability and observability notes
 
-- OCR API errors are caught and logged; failure details are saved in `ocr_logs.error`.
 - Startup logs include bot launch and DB initialization events.
 - `/stats` is useful for basic product telemetry per user.
-
-## Known limitations
-
-- OCR API request is synchronous (`requests`), which can block handler execution under high load.
-- `/stats` currently computes counts in Python after selecting all matching rows; this is less efficient on large datasets.
-- No built-in admin dashboard, quotas, or rate limiting.
 
 ## License
 
